@@ -1,0 +1,51 @@
+# To setup locally:
+# pip install -r requirements_test.txt
+# or
+# pip install -r requirements_deploy.txt
+# pre-commit install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push
+
+## To run this without committing:
+# pre-commit run --all-files
+
+# If this fails, you can run it again if it autofixes (eof, whitespace, isort) and it will pass
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: end-of-file-fixer
+        stages: [commit]
+      - id: trailing-whitespace
+        stages: [commit]
+      - id: requirements-txt-fixer
+        stages: [commit]
+      - id: check-executables-have-shebangs
+        stages: [commit]
+      - id: check-merge-conflict
+        stages: [commit]
+      - id: debug-statements
+        stages: [commit]
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+      - id: black
+        entry: black --line-length 100
+        stages: [commit]
+  - repo: https://github.com/timothycrosley/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        entry: isort --sp pre_conf
+        stages: [commit]
+  - repo: https://github.com/pycqa/flake8
+    rev: '3.9.2'
+    hooks:
+    -   id: flake8
+        entry: flake8 --config pre_conf/flake8.ini
+        additional_dependencies: [
+            'flake8-docstrings==1.5.0'
+        ]
+        stages: [commit]
+  - repo: https://github.com/jorisroovers/gitlint
+    rev: v0.16.0
+    hooks:
+      - id: gitlint

@@ -1,0 +1,5 @@
+{
+  "certificate_arn": "{{cookiecutter.certificate_arn}}",
+  "domain": "{{cookiecutter.domain}}",
+  "credentials_secret": "{{cookiecutter.project_name}}-prod-credentials"
+}

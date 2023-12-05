@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  django:
+    user: 1000:1000
+    build:
+      context: $PWD
+      dockerfile: local/docker/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - $PWD/src/:/var/code
+    depends_on:
+      - db
+    networks:
+      - webnet
+    env_file:
+      - $PWD/local/envs/db.env
+      - $PWD/local/envs/django.env
+  db:
+    image: postgres
+    volumes:
+      - $PWD/local/init/init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
+    env_file:
+      - $PWD/local/envs/db.env
+    ports:
+      - "5431:5432"
+    networks:
+      - webnet
+
+networks:
+  webnet:
