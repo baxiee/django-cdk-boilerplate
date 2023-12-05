@@ -218,7 +218,7 @@ make migrate
 
 ---
 #### Code changes
-When you change the code and be ready are to deploy, you need only to run this command.
+When you change the code and you are ready for deployment, you need only to run this command.
 ```
 pwd # foo-project-backend/infra
 make deploy-backend
