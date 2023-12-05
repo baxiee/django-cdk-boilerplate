@@ -35,4 +35,3 @@ remove-s3-ecr:
 	aws s3 rm --profile {{cookiecutter.project_name}} s3://{{cookiecutter.project_name}}-prod-prereq-bucket --recursive
 	aws s3 rb --profile {{cookiecutter.project_name}} s3://{{cookiecutter.project_name}}-prod-prereq-bucket
 	aws ecr delete-repository --profile {{cookiecutter.project_name}} --repository-name {{cookiecutter.project_name}}-prod-prereq-backend-repository --force
-

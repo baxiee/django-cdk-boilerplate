@@ -179,5 +179,3 @@ class BackendStack(cdk.Stack):
 
         cdk.CfnOutput(self, f"{prefix}-raw-url", value=base_api.url)
         cdk.CfnOutput(self, f"{prefix}-url", value=f"api.{domain}")
-
-
