@@ -96,11 +96,13 @@ cookiecutter gh:baxiee/django-cdk-boilerplate
 ```
 I will keep `foo-project` as my project name for this guide.
 
+---
 ### Local development
 The entire project uses docker and docker-compose.  
 There are two images: PostgreSQL and the Django backend. 
 All elements used for running the local environment 
 can be found in `foo-project-backend/local`. 
+
 ---
 #### Initial configuration
 I treat backend and prereq as separated repositories. For each I initialize git and pre-commmit. 
@@ -109,6 +111,7 @@ pwd # foo-project
 (cd foo-project-backend && git init && pre-commit install)
 (cd foo-project-prereq && git init && pre-commit install)
 ```
+
 ---
 #### Virtual Env configuration
 ```
@@ -118,12 +121,14 @@ source venv/bin/activate
 pip install -r foo-project-backend/requirements.txt 
 ```
 Add this venv as `Python Interpreter` in your IDE.
+
 ---
 #### File hierarchy  
 I mark `foo-project-backend/src/backend` as `Sources Root`.  
 Also I exclude all `venv` folders from Pycharm's indexing.
 
 ![img](./imgs/1_file_hierarchy.png)
+
 ---
 #### Makefiles
 Each repository has one or two Makefile files. 
@@ -141,6 +146,7 @@ make upbuild
 ![img](./imgs/2_1_logs.png)
 
 Example endpoint - `/api/users/`
+
 ![img](./imgs/2_2_django.png)
 
 ---
@@ -217,6 +223,7 @@ When you change the code and be ready are to deploy, you need only to run this c
 pwd # foo-project-backend/infra
 make deploy-backend
 ```
+
 ---
 #### Final
 Final check of API
