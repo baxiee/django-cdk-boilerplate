@@ -227,6 +227,7 @@ make deploy-backend
 ---
 #### Final
 Final check of API
+
 ![img](./imgs/5_1_api.png)
 
 ---
