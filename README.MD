@@ -17,20 +17,19 @@ have no limits that may arise when using other libraries/frameworks.
 I use CDK because it is a native solution that is much more convenient 
 than YAML files that need to be created for CloudFormation.
 
-
+---
 ### Technologies
-python
-aws
-cdk
-docker
-docker-compose
-pre-commit
-black
-flake8
-django
-jq
-etc.
+- python
+- aws
+- cdk
+- jq
+- docker
+- docker-compose
+- pre-commit: black, flake8, isort
+- django; django-rest-framework
+- ...
 
+---
 ### AWS Services
 Fully deployed project uses:
 - RDS (postgres, T3 MICRO)
@@ -41,7 +40,7 @@ Fully deployed project uses:
 - RDS secrets (generated automatically)
 - Other secrets (like `DJANGO_SECRET_KEY`, generated manually)
 
-
+---
 ### Requirements:
 ```
 make -v 
@@ -66,9 +65,13 @@ aws-cli/2.11.15
 
 jq -V
 jq-1.6
+
+
+cdk --version
+2.90.0 (build 8c535e4)
 ```
 
-
+---
 ### Structure
 For django structure check this [styleguide](https://github.com/HackSoftware/Django-Styleguide).
 - `{{cookiecutter.project_name}}-backend` - holds API and CDK code
@@ -82,14 +85,11 @@ It is deployed only once per project.
 - `{{cookiecutter.project_name}}-backend/infra/Makefile` - helpful commands for deploy management
  
 
-
+---
 ### Project creation
 ```
 pip install cookiecutter
-git clone ...
-```
-```
-cookiecutter django-cdk-boilerplate/
+cookiecutter gh:baxiee/django-cdk-boilerplate
   [1/3] project_name (foo-project): foo-project     (name for both project and aws credentials)      
   [2/3] certificate_arn ():         cert-xxxxxx     (your domain certificate [optional])
   [3/3] domain ():                  foo-domain.com  (your domain url [optional]) 
@@ -101,15 +101,16 @@ The entire project uses docker and docker-compose.
 There are two images: PostgreSQL and the Django backend. 
 All elements used for running the local environment 
 can be found in `foo-project-backend/local`. 
-####Initial configuration
+---
+#### Initial configuration
 I treat backend and prereq as separated repositories. For each I initialize git and pre-commmit. 
 ```
 pwd # foo-project 
 (cd foo-project-backend && git init && pre-commit install)
 (cd foo-project-prereq && git init && pre-commit install)
 ```
-
-####Virtual Env configuration
+---
+#### Virtual Env configuration
 ```
 pwd # foo-project
 python -m venv venv
@@ -117,19 +118,21 @@ source venv/bin/activate
 pip install -r foo-project-backend/requirements.txt 
 ```
 Add this venv as `Python Interpreter` in your IDE.
-
-####File hierarchy
+---
+#### File hierarchy  
 I mark `foo-project-backend/src/backend` as `Sources Root`.  
 Also I exclude all `venv` folders from Pycharm's indexing.
-![img](./imgs/1_file_hierarchy.png)
 
-####Makefiles
+![img](./imgs/1_file_hierarchy.png)
+---
+#### Makefiles
 Each repository has one or two Makefile files. 
 They are available either in the main project root or in the infra directory. 
 The commands found there are self-descriptive. 
 We will use a few command through this guide.
 
-####Containers
+---
+#### Containers
 Initial run and migrations
 ```
 pwd # foo-project-backend
@@ -140,7 +143,8 @@ make upbuild
 Example endpoint - `/api/users/`
 ![img](./imgs/2_2_django.png)
 
-####Migrations
+---
+#### Migrations
 If you change something in model and want to prepare migrations just run command.
 ```
 pwd # foo-project-backend
@@ -154,8 +158,9 @@ pwd # foo-project-backend
 make upbuild
 ```
 
-###AWS deployment
-####Credentials configuration
+---
+### AWS deployment
+#### Credentials configuration
 Open AWS credentials file
 ```
 sudo nano ~/.aws/credentials
@@ -167,13 +172,17 @@ aws_access_key_id = YOUR_KEY
 aws_secret_access_key = YOUR_SECRET
 region = PROJECT_TARGET_REGION  
 ```
-####Create secret
+
+---
+#### Create secret
 ```
 pwd # foo-project-prereq/infra
 make create-django-secret
 ```
 ![img](./imgs/3_1_secret.png)
-####Deploy prereq
+
+---
+#### Deploy prereq
 Prereq creates RDS, S3 and ECR assets.
 ```
 pwd # foo-project-prereq/infra
@@ -183,7 +192,7 @@ make deploy-prereq
 <sub>Remember to mark all cdk.out and venv as excluded in your IDE.</sub>
 
 ---
-####Deploy backend
+#### Deploy backend
 Backend creates api gatewway, docker image and lambda.
 ```
 pwd # foo-project-backend/infra
@@ -194,7 +203,7 @@ make deploy-backend
 ![img](./imgs/4_2_gateway.png)
 
 ---
-####Migrations
+#### Migrations
 ```
 pwd # foo-project-backend/infra
 make migrate
@@ -202,18 +211,19 @@ make migrate
 ![img](./imgs/4_1_migrations.png)
 
 ---
-####Code changes
+#### Code changes
 When you change the code and be ready are to deploy, you need only to run this command.
 ```
 pwd # foo-project-backend/infra
 make deploy-backend
 ```
 ---
-####Final
+#### Final
 Final check of API
 ![img](./imgs/5_1_api.png)
 
-###Destroying
+---
+### Destroying
 Firstly destroy backend stack.
 ```
 pwd # foo-project-backend/infra
