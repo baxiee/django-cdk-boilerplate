@@ -77,38 +77,7 @@ Fully deployed project uses:
 - RDS secrets (generated automatically)
 - Other secrets (like `DJANGO_SECRET_KEY`, generated manually)
 
----
-### Requirements:
-```
-make -v 
-GNU Make 4.3
 
-
-docker -v
-Docker version 24.0.5, build 24.0.5-0ubuntu1~22.04.1
-
-
-docker-compose -v
-docker-compose version 1.29.2, build unknown
-
-
-pip freeze | grep cookiecutter
-cookiecutter==2.5.0
-
-
-aws --version
-aws-cli/2.11.15 
-
-
-jq -V
-jq-1.6
-
-
-cdk --version
-2.90.0 (build 8c535e4)
-```
-
----
 ### Structure
 For django structure check this [styleguide](https://github.com/HackSoftware/Django-Styleguide).
 - `{{cookiecutter.project_name}}-backend` - holds API and CDK code
