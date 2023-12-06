@@ -1,33 +1,70 @@
-## A no-cost AWS infrastructure boilerplate for Python (Django) API
+<p align="center">
+    <img src="https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white" alt="AWS"/>
+    <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white" alt="DOCKER"/>
+    <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" alt="PYTHON"/>
+    <img src="https://raw.githubusercontent.com/cookiecutter/cookiecutter/3ac078356adf5a1a72042dfe72ebfa4a9cd5ef38/logo/cookiecutter_medium.png" alt="COOKIECUTTER" height="30"/>
 
-<b>The only thing you need to pay for is Secret Manager (1$ monthly for each secret).  
-Only works using free tiers, for accounts less than a year old.</b>
-![img](./imgs/awscdk-python-template.png)
+    
+</p>
 
+# django-cdk-boilerplate
+
+##### A no-cost AWS infrastructure boilerplate for Python API. Works with free tiers for accounts less than a year old. The only thing you need to pay for is Secret Manager (1$ monthly for each secret).
 The project's aim is to create a reusable boilerplate for 
 faster development and validation of MVP-type projects. 
 The project utilizes the Cloud Development Kit ([CDK](https://aws.amazon.com/cdk/)), 
 which enables the definition of infrastructure 
-through a programming language (such as Python or JavaScript). 
-Since the project is based on Django, which is in Python, the infrastructure is also written in this language.
+through a programming language. 
+Since the project is based on Django, the infrastructure is defined in Python.
 
-### Why
-Creating this boilerplate, I wanted my solution to be scalable and 
+---
+### Reason
+By creating this boilerplate, I wanted my solution to be scalable and 
 have no limits that may arise when using other libraries/frameworks. 
 I use CDK because it is a native solution that is much more convenient 
 than YAML files that need to be created for CloudFormation.
 
 ---
-### Technologies
-- python
-- aws
-- cdk
-- jq
-- docker
-- docker-compose
-- pre-commit: black, flake8, isort
-- django; django-rest-framework
-- ...
+### Python stack
+- Python 3.10
+- Django>=3.2,<4
+
+---
+### Require libraries/packages
+- [Make](https://www.gnu.org/software/make/)
+```
+make -v 
+GNU Make 4.3
+```
+- [awscli](https://docs.aws.amazon.com/cli/v1/userguide/cli-chap-welcome.html)
+```
+aws --version
+aws-cli/2.11.15 Python/3.11.3 Linux/6.2.0-37-generic exe/x86_64.ubuntu.22 prompt/off
+```
+- [cdk](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html)
+```
+cdk --version
+2.90.0 (build 8c535e4)
+```
+
+- [jq](https://jqlang.github.io/jq/)
+```
+jq -V
+jq-1.6
+```
+- [Docker](https://www.docker.com/)
+```
+docker -v
+Docker version 24.0.5, build 24.0.5-0ubuntu1~22.04.1
+docker-compose -v
+docker-compose version 1.29.2, build unknown
+```
+- [Cookiecutter](https://cookiecutter.readthedocs.io/en/stable/installation.html)
+```
+cookiecutter -V
+Cookiecutter 2.5.0 from /home/magnus/.local/lib/python3.8/site-packages (Python 3.8.18 (default, Aug 25 2023, 13:20:30) 
+[GCC 11.4.0])
+```
 
 ---
 ### AWS Services
