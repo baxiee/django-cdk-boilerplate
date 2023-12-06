@@ -246,16 +246,16 @@ make destroy-backend
 By default RDS has deletion protection, before we delete prereq stack, we need to disable this protection.
 ```
 pwd # foo-project-prereq/infra
-make modify-rds
+make disable-rds-protection
 ```
 Then you can remove prereq stack
 ```
 pwd # foo-project-prereq/infra
 make destroy-prereq
 ```
-The last one step is to remove S3 bucket and ECR
+The last one step is to remove S3 bucket, ECR and Secret
 ```
 pwd # foo-project-prereq/infra
-make remove-s3-ecr
+make final-clean
 ```
 
