@@ -17,19 +17,22 @@ which enables the definition of infrastructure
 through a programming language. 
 Since the project is based on Django, the infrastructure is defined in Python.
 
----
+<br/>
+
 ### Reason
 By creating this boilerplate, I wanted my solution to be scalable and 
 have no limits that may arise when using other libraries/frameworks. 
 I use CDK because it is a native solution that is much more convenient 
 than YAML files that need to be created for CloudFormation.
 
----
+<br/>
+
 ### Python stack
 - Python 3.10
 - Django>=3.2,<4
 
----
+<br/>
+
 ### Require libraries/packages
 - [Make](https://www.gnu.org/software/make/)
 ```
@@ -66,7 +69,8 @@ Cookiecutter 2.5.0 from /home/magnus/.local/lib/python3.8/site-packages (Python 
 [GCC 11.4.0])
 ```
 
----
+<br/>
+
 ### AWS Services
 Fully deployed project uses:
 - RDS (postgres, T3 MICRO)
@@ -90,9 +94,11 @@ holds CDK code, that creates RDS, ECR and S3 bucket.
 It is deployed only once per project.
 - `{{cookiecutter.project_name}}-backend/infra/Makefile` - helpful commands for deploy management
  
+<br/>
+<br/>
+<br/>
 
----
-### Project creation
+# Usage
 ```
 pip install cookiecutter
 cookiecutter gh:baxiee/django-cdk-boilerplate
@@ -102,14 +108,18 @@ cookiecutter gh:baxiee/django-cdk-boilerplate
 ```
 I will keep `foo-project` as my project name for this guide.
 
----
-### Local development
+<br/>
+<br/>
+<br/>
+
+# Local development
 The entire project uses docker and docker-compose.  
 There are two images: PostgreSQL and the Django backend. 
 All elements used for running the local environment 
 can be found in `foo-project-backend/local`. 
 
----
+<br/>
+
 #### Initial configuration
 I treat backend and prereq as separated repositories. For each I initialize git and pre-commmit. 
 ```
@@ -118,7 +128,8 @@ pwd # foo-project
 (cd foo-project-prereq && git init && pre-commit install)
 ```
 
----
+<br/>
+
 #### Virtual Env configuration
 ```
 pwd # foo-project
@@ -128,21 +139,24 @@ pip install -r foo-project-backend/requirements.txt
 ```
 Add this venv as `Python Interpreter` in your IDE.
 
----
+<br/>
+
 #### File hierarchy  
 I mark `foo-project-backend/src/backend` as `Sources Root`.  
 Also I exclude all `venv` folders from Pycharm's indexing.
 
 ![img](./imgs/1_file_hierarchy.png)
 
----
+<br/>
+
 #### Makefiles
 Each repository has one or two Makefile files. 
 They are available either in the main project root or in the infra directory. 
 The commands found there are self-descriptive. 
 We will use a few command through this guide.
 
----
+<br/>
+
 #### Containers
 Initial run and migrations
 ```
@@ -155,7 +169,8 @@ Example endpoint - `/api/users/`
 
 ![img](./imgs/2_2_django.png)
 
----
+<br/>
+
 #### Migrations
 If you change something in model and want to prepare migrations just run command.
 ```
@@ -170,8 +185,11 @@ pwd # foo-project-backend
 make upbuild
 ```
 
----
-### AWS deployment
+<br/>
+<br/>
+<br/>
+
+# AWS deployment
 #### Credentials configuration
 Open AWS credentials file
 ```
@@ -185,7 +203,8 @@ aws_secret_access_key = YOUR_SECRET
 region = PROJECT_TARGET_REGION  
 ```
 
----
+<br/>
+
 #### Create secret
 ```
 pwd # foo-project-prereq/infra
@@ -193,7 +212,8 @@ make create-django-secret
 ```
 ![img](./imgs/3_1_secret.png)
 
----
+<br/>
+
 #### Deploy prereq
 Prereq creates RDS, S3 and ECR assets.
 ```
@@ -203,7 +223,8 @@ make deploy-prereq
 ```
 <sub>Remember to mark all cdk.out and venv as excluded in your IDE.</sub>
 
----
+<br/>
+
 #### Deploy backend
 Backend creates api gatewway, docker image and lambda.
 ```
@@ -214,7 +235,8 @@ make deploy-backend
 
 ![img](./imgs/4_2_gateway.png)
 
----
+<br/>
+
 #### Migrations
 ```
 pwd # foo-project-backend/infra
@@ -222,7 +244,8 @@ make migrate
 ```
 ![img](./imgs/4_1_migrations.png)
 
----
+<br/>
+
 #### Code changes
 When you change the code and you are ready for deployment, you need only to run this command.
 ```
@@ -230,14 +253,16 @@ pwd # foo-project-backend/infra
 make deploy-backend
 ```
 
----
+<br/>
+
 #### Final
 Final check of API
 
 ![img](./imgs/5_1_api.png)
 
----
-### Destroying
+<br/>
+
+# Destroying
 Firstly destroy backend stack.
 ```
 pwd # foo-project-backend/infra
