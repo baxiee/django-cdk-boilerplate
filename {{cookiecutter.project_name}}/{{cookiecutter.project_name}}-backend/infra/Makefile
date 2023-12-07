@@ -6,8 +6,8 @@ CDK_CFG=--profile {{cookiecutter.project_name}} --require-approval never -c env=
 
 
 venv-install:
-	if [ ! -d "venv" ]; then python3.10 -m venv venv; fi
-	venv/bin/pip3.10 install -r requirements.txt
+	if [ ! -d "venv" ]; then python3 -m venv venv; fi
+	venv/bin/pip install -r requirements.txt
 	source venv/bin/activate
 
 

@@ -65,8 +65,7 @@ docker-compose version 1.29.2, build unknown
 - [Cookiecutter](https://cookiecutter.readthedocs.io/en/stable/installation.html)
 ```
 cookiecutter -V
-Cookiecutter 2.5.0 from /home/magnus/.local/lib/python3.8/site-packages (Python 3.8.18 (default, Aug 25 2023, 13:20:30) 
-[GCC 11.4.0])
+Cookiecutter 2.5.0
 ```
 
 <br/>
