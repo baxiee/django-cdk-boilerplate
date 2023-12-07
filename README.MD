@@ -9,7 +9,7 @@
 
 # django-cdk-boilerplate
 
-##### A no-cost AWS infrastructure boilerplate for Python API. Works with free tiers for accounts less than a year old. The only thing you need to pay for is Secret Manager (1$ monthly for each secret).
+##### A low-cost AWS infrastructure boilerplate for Python API. Works with free tiers for accounts less than a year old. The only thing you need to pay for is Secret Manager (1$ monthly for each secret).
 The project's aim is to create a reusable boilerplate for 
 faster development and validation of MVP-type projects. 
 The project utilizes the Cloud Development Kit ([CDK](https://aws.amazon.com/cdk/)), 
