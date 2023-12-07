@@ -46,12 +46,12 @@ shell:
 
 
 admin:
-	docker-compose ${COMPOSE_ARGS} exec django bash -c "cd backend && python manage.py shell -c \"from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(username='admin1').exists() or User.objects.create_superuser('admin1', 'admin1@example.com', 'admin1')\""
+	docker-compose ${COMPOSE_ARGS} exec django bash -c "cd backend && python3 manage.py shell -c \"from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(username='admin1').exists() or User.objects.create_superuser('admin1', 'admin1@example.com', 'admin1')\""
 
 
 django:
-	docker-compose ${COMPOSE_ARGS} exec django bash -c "cd backend && python manage.py shell"
+	docker-compose ${COMPOSE_ARGS} exec django bash -c "cd backend && python3 manage.py shell"
 
 
 makemigrations:
-	docker-compose ${COMPOSE_ARGS} exec django bash -c "cd backend && python manage.py makemigrations"
+	docker-compose ${COMPOSE_ARGS} exec django bash -c "cd backend && python3 manage.py makemigrations"

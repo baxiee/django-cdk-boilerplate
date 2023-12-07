@@ -132,7 +132,7 @@ pwd # foo-project
 #### Virtual Env configuration
 ```
 pwd # foo-project
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 pip install -r foo-project-backend/requirements.txt 
 ```
