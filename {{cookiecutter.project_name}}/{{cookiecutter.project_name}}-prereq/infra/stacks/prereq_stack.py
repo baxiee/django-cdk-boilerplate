@@ -95,7 +95,9 @@ class PrereqStack(cdk.Stack):
             f"{prefix}-rds-instance",
             instance_identifier=f"{prefix}-rds-instance",
             database_name=prefix.replace("-", ""),
-            engine=rds.DatabaseInstanceEngine.postgres(version=rds.PostgresEngineVersion.VER_13_11),
+            engine=rds.DatabaseInstanceEngine.postgres(
+                version=rds.PostgresEngineVersion.VER_13_11
+            ),
             instance_type=ec2.InstanceType("t3.micro"),
             vpc=vpc,
             vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PUBLIC),

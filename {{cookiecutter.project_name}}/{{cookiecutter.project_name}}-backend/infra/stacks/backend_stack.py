@@ -53,7 +53,9 @@ class BackendStack(cdk.Stack):
         )
 
         if domain and certificate_arn:
-            self.create_api_gateway_with_domain(prefix, handler, domain, certificate_arn)
+            self.create_api_gateway_with_domain(
+                prefix, handler, domain, certificate_arn
+            )
         else:
             self.create_api_gateway(prefix, handler)
 
@@ -168,13 +170,17 @@ class BackendStack(cdk.Stack):
             get_widgets_integration,
         )
 
-        zone = route53.HostedZone.from_lookup(self, f"{prefix}-hosted-zone", domain_name=domain)
+        zone = route53.HostedZone.from_lookup(
+            self, f"{prefix}-hosted-zone", domain_name=domain
+        )
         route53.ARecord(
             self,
             f"{prefix}-dns-record",
             record_name="api",
             zone=zone,
-            target=route53.RecordTarget.from_alias(route53_targets.ApiGateway(base_api)),
+            target=route53.RecordTarget.from_alias(
+                route53_targets.ApiGateway(base_api)
+            ),
         )
 
         cdk.CfnOutput(self, f"{prefix}-raw-url", value=base_api.url)

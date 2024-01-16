@@ -3,7 +3,6 @@ import os
 
 from settings.base import *
 
-from aws.utils import get_db_connection_params, get_secret
 
 SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
@@ -13,11 +12,22 @@ ALLOWED_HOSTS = ["*"]
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-rds_secret_variables = get_secret(os.environ["POSTGRES_SECRET_NAME"], os.environ["AWS_REGION"])
 
-DATABASES = {"default": get_db_connection_params(rds_secret_variables)}
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ["RDS_DBNAME"],
+        "USER": os.environ["RDS_USERNAME"],
+        "HOST": os.environ["RDS_HOST"],
+        "PASSWORD": os.environ["RDS_PASSWORD"],
+        "PORT": os.environ["RDS_PORT"],
+        "OPTIONS": {"connect_timeout": 60},
+    }
+}
 
-REST_FRAMEWORK.update({"DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",)})
+REST_FRAMEWORK.update(
+    {"DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",)}
+)
 
 STATIC_URL = "/static/"
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"

@@ -30,7 +30,9 @@ BackendStack(
     params=params,
     env=cdk.Environment(account=params["account_id"], region=params["region"]),
     synthesizer=cdk.DefaultStackSynthesizer(
-        image_assets_repository_name=app.node.try_get_context("assets-ecr-repository-name"),
+        image_assets_repository_name=app.node.try_get_context(
+            "assets-ecr-repository-name"
+        ),
     ),
 )
 
