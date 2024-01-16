@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     # apps
     "apps.users",
+    "apps.healthpoint",
 ]
 
 MIDDLEWARE = [
